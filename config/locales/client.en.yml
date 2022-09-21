@@ -1,4 +1,12 @@
 en:
+  site_settings:
+    desoc_badges_enabled: "Is this plugin awesome or not?"
+    desoc_infura_id: "Infura ID to be used for authenticating rpc requests"
+    desoc_json_rpc: "JSON RPC configuration to be used for blockchain interaction"
+    placeholder:
+      desoc_json_rpc:
+        key: "Chain ID"
+        value: "JSON RPC URL"
   js:
     discourse_plugin_name:
       placeholder: placeholder
