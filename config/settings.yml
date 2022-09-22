@@ -2,9 +2,15 @@ plugins:
   desoc_badges_enabled:
     default: true
     client: true
-  desoc_infura_id:
+  desoc_ipfs_gateway:
+    default: 'https://ipfs.io/ipfs'
+    client: true
+  desoc_factory_contract:
     client: true
     default: ''
+  desoc_chain_id:
+    client: true
+    default: 5
   desoc_json_rpc:
     client: true
     default: 'https://goerli.infura.io/v3/1b91f66482d64c7e900913c7763227f2'

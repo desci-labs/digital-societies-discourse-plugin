@@ -9,5 +9,7 @@
 
 enabled_site_setting :desoc_badges_enabled
 
+register_asset "stylesheets/common.scss"
+
 after_initialize do
 end

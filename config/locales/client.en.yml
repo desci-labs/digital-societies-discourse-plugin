@@ -1,8 +1,10 @@
 en:
   site_settings:
     desoc_badges_enabled: "Is this plugin awesome or not?"
-    desoc_infura_id: "Infura ID to be used for authenticating rpc requests"
+    desoc_ipfs_gateway: "custom ipfs gateway for querying IPFS CIDString content (remove trailing /)"
     desoc_json_rpc: "JSON RPC configuration to be used for blockchain interaction"
+    desoc_chain_id: "Custom Chain ID where the factory contract is deployed to"
+    desoc_factory_contract: "Input Desco Factory contract address here"
     placeholder:
       desoc_json_rpc:
         key: "Chain ID"
@@ -10,3 +12,5 @@ en:
   js:
     discourse_plugin_name:
       placeholder: placeholder
+    desoc_badges:
+      title: "Desoc badge plugin"

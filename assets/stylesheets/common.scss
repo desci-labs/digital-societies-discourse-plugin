@@ -1,0 +1,25 @@
+.desoc-container {
+  width: 100%;
+  max-width: fit-content;
+  text-align: left;
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.desoc-group-list {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.desoc-badge {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
