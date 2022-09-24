@@ -1,5 +1,5 @@
-# **Plugin Name** Plugin
+# **Discourse Desoc Badges** Plugin
 
-**Plugin Summary**
+**Discourse plugin to display badges for Desoc members**
 
 For more information, please see: **url to meta topic**
