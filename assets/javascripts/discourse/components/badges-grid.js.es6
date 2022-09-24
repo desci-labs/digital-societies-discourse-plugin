@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import loadScript from "discourse/lib/load-script";
+import KeyValueStore from "discourse/lib/key-value-store";
 
 //TODO: add to siteSettings
 const FACTORY_DEPLOY_BLOCK = 7590799;
@@ -1075,26 +1076,13 @@ const tokenAbi = [
   },
 ];
 
+const keyValueStore = new KeyValueStore("");
+
 export default class BadgesGrid extends Component {
   tagName = "div";
 
   init() {
     super.init(...arguments);
-
-    this.badges = [
-      {
-        external_link: "https://desci.com",
-        name: "Desci Foundation",
-        badge:
-          "https://w3s.link/ipfs/bafkreiel3hii37shqhwt42jbji6udrf5aphbbzk7rhcqtgwpeifzdsqrv4",
-      },
-      {
-        external_link: "https://desci.com",
-        name: "Desci Foundation",
-        badge:
-          "https://w3s.link/ipfs/bafkreiel3hii37shqhwt42jbji6udrf5aphbbzk7rhcqtgwpeifzdsqrv4",
-      },
-    ];
 
     this.startUp();
   }
@@ -1114,6 +1102,10 @@ export default class BadgesGrid extends Component {
       !this.account
     )
       return;
+
+    // preload saved values from store
+    const cached = keyValueStore.getObject("desoc-badges");
+     this.set("credentials", cached || []);
 
     const { ethers } = window.ethers;
     this.ethers = ethers;
@@ -1140,6 +1132,7 @@ export default class BadgesGrid extends Component {
     let credentials = await Promise.all(
       sbts.map(this.getSbtCredentials.bind(this))
     );
+
     credentials = credentials
       .filter(Boolean)
       .flat()
@@ -1151,6 +1144,7 @@ export default class BadgesGrid extends Component {
           banner: this.resolveIpfsURL(data.metadata.banner),
         },
       }));
+    keyValueStore.setObject({key: 'desoc-badges', value: credentials});
     this.set("credentials", credentials);
   }
 
