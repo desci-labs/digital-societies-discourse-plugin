@@ -2,7 +2,6 @@ import Component from "@ember/component";
 import loadScript from "discourse/lib/load-script";
 import KeyValueStore from "discourse/lib/key-value-store";
 
-//TODO: add to siteSettings
 const FACTORY_DEPLOY_BLOCK = 7590799;
 
 const factoryAbi = [
@@ -1080,6 +1079,7 @@ const keyValueStore = new KeyValueStore("");
 
 export default class BadgesGrid extends Component {
   tagName = "div";
+  classNames = ['badges-grid']
 
   init() {
     super.init(...arguments);
@@ -1087,14 +1087,40 @@ export default class BadgesGrid extends Component {
     this.startUp();
   }
 
+  getSiweAccount() {
+    const associated_accounts = this.model.associated_accounts;
+    if (!associated_accounts) return null;
+    const siwe_account = associated_accounts.find(account => account.name === "siwe")
+    return siwe_account;
+  }
+
   async startUp() {
+    const siwe_account = this.getSiweAccount();
+    if (!siwe_account) return;
+    const isAddress = siwe_account.description.startsWith("0x") && siwe_account.description.length === 42;
+    
     await this.loadScripts();
     this.multiformats = window.multiformats;
     this.ipfsGateway = this.siteSettings.desoc_ipfs_gateway;
 
-    const ethereum = await window.withWeb3();
-    const accounts = await ethereum.request({ method: "eth_accounts" });
-    this.account = accounts[0];
+    const { ethers } = window.ethers;
+    this.ethers = ethers;
+    this.provider = new ethers.providers.JsonRpcProvider(
+      this.siteSettings.desoc_json_rpc
+    );
+    const mainnetProvider = new ethers.providers.JsonRpcProvider(
+      this.siteSettings.desoc_mainnet_json_rpc
+    );
+    if (!this.provider) return;
+    
+    this.account = siwe_account.description;
+    
+    if (!isAddress) {
+      this.account = await mainnetProvider.resolveName(
+        siwe_account.description
+      );
+    }
+    this.desoc_key = `desoc-badges-${this.account}`;
 
     if (
       !this.siteSettings.desoc_json_rpc ||
@@ -1104,15 +1130,10 @@ export default class BadgesGrid extends Component {
       return;
 
     // preload saved values from store
-    const cached = keyValueStore.getObject("desoc-badges");
+    const cached = keyValueStore.getObject(this.desoc_key);
      this.set("credentials", cached || []);
 
-    const { ethers } = window.ethers;
-    this.ethers = ethers;
-    this.provider = new ethers.providers.JsonRpcProvider(
-      this.siteSettings.desoc_json_rpc
-    );
-    if (!this.provider) return;
+    
     this.queryDesocFactory();
   }
 
@@ -1144,7 +1165,7 @@ export default class BadgesGrid extends Component {
           banner: this.resolveIpfsURL(data.metadata.banner),
         },
       }));
-    keyValueStore.setObject({key: 'desoc-badges', value: credentials});
+    keyValueStore.setObject({key: this.desoc_key, value: credentials});
     this.set("credentials", credentials);
   }
 

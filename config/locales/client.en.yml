@@ -3,10 +3,14 @@ en:
     desoc_badges_enabled: "Is this plugin awesome or not?"
     desoc_ipfs_gateway: "custom ipfs gateway for querying IPFS CIDString content (remove trailing /)"
     desoc_json_rpc: "JSON RPC configuration to be used for blockchain interaction"
+    desoc_mainnet_json_rpc: "JSON RPC configuration to be used for resolving ens names"
     desoc_chain_id: "Custom Chain ID where the factory contract is deployed to"
     desoc_factory_contract: "Input Desco Factory contract address here"
     placeholder:
       desoc_json_rpc:
+        key: "Chain ID"
+        value: "JSON RPC URL"
+      desoc_mainnet_json_rpc:
         key: "Chain ID"
         value: "JSON RPC URL"
   js:
