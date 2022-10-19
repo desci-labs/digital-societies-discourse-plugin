@@ -1,7 +1,7 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 function initWithApi(api) {
-  // console.log('init with api', api);
+  console.log('init with api', api);
   window.withWeb3 = function () {
     if (window.ethereum) {
       return window.ethereum

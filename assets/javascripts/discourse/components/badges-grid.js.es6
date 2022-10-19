@@ -1079,7 +1079,7 @@ const keyValueStore = new KeyValueStore("");
 
 export default class BadgesGrid extends Component {
   tagName = "div";
-  classNames = ['badges-grid']
+  classNames = ["badges-grid"];
 
   init() {
     super.init(...arguments);
@@ -1090,15 +1090,36 @@ export default class BadgesGrid extends Component {
   getSiweAccount() {
     const associated_accounts = this.model.associated_accounts;
     if (!associated_accounts) return null;
-    const siwe_account = associated_accounts.find(account => account.name === "siwe")
+    const siwe_account = associated_accounts.find(
+      (account) => account.name === "siwe"
+    );
     return siwe_account;
+  }
+
+  renderCachedBadges(account) {
+    // preload saved values from store
+    console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
+    const cached =
+      keyValueStore.getObject(account) ||
+      keyValueStore.getObject(account);
+
+    this.set("credentials", cached || []);
   }
 
   async startUp() {
     const siwe_account = this.getSiweAccount();
-    if (!siwe_account) return;
-    const isAddress = siwe_account.description.startsWith("0x") && siwe_account.description.length === 42;
-    
+    this.desoc_user_key = `desoc-badges-${this.model.id}`;
+
+    if (!siwe_account) {
+      this.renderCachedBadges(this.desoc_user_key);
+      return;
+    }
+
+    // if (!siwe_account) return;
+    const isAddress =
+      siwe_account.description.startsWith("0x") &&
+      siwe_account.description.length === 42;
+
     await this.loadScripts();
     this.multiformats = window.multiformats;
     this.ipfsGateway = this.siteSettings.desoc_ipfs_gateway;
@@ -1112,15 +1133,14 @@ export default class BadgesGrid extends Component {
       this.siteSettings.desoc_mainnet_json_rpc
     );
     if (!this.provider) return;
-    
+
     this.account = siwe_account.description;
-    
+
     if (!isAddress) {
       this.account = await mainnetProvider.resolveName(
         siwe_account.description
       );
     }
-    this.desoc_key = `desoc-badges-${this.account}`;
 
     if (
       !this.siteSettings.desoc_json_rpc ||
@@ -1129,11 +1149,9 @@ export default class BadgesGrid extends Component {
     )
       return;
 
-    // preload saved values from store
-    const cached = keyValueStore.getObject(this.desoc_key);
-     this.set("credentials", cached || []);
+    this.desoc_key = `desoc-badges-${this.account}`;
+    this.renderCachedBadges(this.desoc_key);
 
-    
     this.queryDesocFactory();
   }
 
@@ -1157,15 +1175,10 @@ export default class BadgesGrid extends Component {
     credentials = credentials
       .filter(Boolean)
       .flat()
-      .map((data) => ({
-        ...data,
-        metadata: {
-          ...data.metadata,
-          badge: this.resolveIpfsURL(data.metadata.badge),
-          banner: this.resolveIpfsURL(data.metadata.banner),
-        },
-      }));
-    keyValueStore.setObject({key: this.desoc_key, value: credentials});
+      
+    keyValueStore.setObject({ key: this.desoc_key, value: credentials });
+    keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
+    
     this.set("credentials", credentials);
   }
 
@@ -1180,7 +1193,6 @@ export default class BadgesGrid extends Component {
     if (balance.toNumber() === 0) return null;
 
     const filter = contract.filters.Mint(null, this.account);
-
     const events = await contract.queryFilter(filter, FACTORY_DEPLOY_BLOCK);
     if (!events.length) return null;
 
