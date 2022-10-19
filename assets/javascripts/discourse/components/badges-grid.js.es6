@@ -6,6 +6,30 @@ const FACTORY_DEPLOY_BLOCK = 7590799;
 
 const factoryAbi = [
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "forwarder",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "org",
+        type: "address",
+      },
+    ],
+    name: "Refuted",
+    type: "event",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -25,6 +49,19 @@ const factoryAbi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "org",
+        type: "address",
+      },
+    ],
+    name: "Verified",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "string",
@@ -37,9 +74,9 @@ const factoryAbi = [
         type: "string",
       },
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "_metadata",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "deployToken",
@@ -50,6 +87,96 @@ const factoryAbi = [
         type: "address",
       },
     ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getTrustedForwarder",
+    outputs: [
+      {
+        internalType: "address",
+        name: "forwarder",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "forwarder",
+        type: "address",
+      },
+    ],
+    name: "isTrustedForwarder",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "org",
+        type: "address",
+      },
+    ],
+    name: "refute",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "verified",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "org",
+        type: "address",
+      },
+    ],
+    name: "verify",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -69,9 +196,9 @@ const tokenAbi = [
         type: "string",
       },
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "_metadata",
-        type: "bytes",
+        type: "string",
       },
       {
         internalType: "address",
@@ -138,31 +265,6 @@ const tokenAbi = [
       {
         indexed: true,
         internalType: "address",
-        name: "revokedBy",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "address[]",
-        name: "owners",
-        type: "address[]",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "tokenIds",
-        type: "uint256[]",
-      },
-    ],
-    name: "BatchRevoked",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
         name: "mintedBy",
         type: "address",
       },
@@ -173,7 +275,7 @@ const tokenAbi = [
         type: "address",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "tokenId",
         type: "uint256",
@@ -204,7 +306,7 @@ const tokenAbi = [
         type: "address",
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
         name: "tokenId",
         type: "uint256",
@@ -349,9 +451,9 @@ const tokenAbi = [
       },
       {
         indexed: false,
-        internalType: "bytes",
+        internalType: "string",
         name: "uri",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "TypeCreated",
@@ -368,9 +470,9 @@ const tokenAbi = [
       },
       {
         indexed: false,
-        internalType: "bytes",
+        internalType: "string",
         name: "uri",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "TypeUpdated",
@@ -488,9 +590,9 @@ const tokenAbi = [
     name: "contractURI",
     outputs: [
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "",
-        type: "bytes",
+        type: "string",
       },
     ],
     stateMutability: "view",
@@ -664,9 +766,9 @@ const tokenAbi = [
   {
     inputs: [
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "typeURI_",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "mintTokenType",
@@ -827,9 +929,9 @@ const tokenAbi = [
   {
     inputs: [
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "contractURI_",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "setContractURI",
@@ -873,25 +975,6 @@ const tokenAbi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_tokenId",
-        type: "uint256",
-      },
-    ],
-    name: "tokenCID",
-    outputs: [
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
         name: "",
         type: "uint256",
       },
@@ -911,26 +994,7 @@ const tokenAbi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "tokenToMinter",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "tokenId",
+        name: "_tokenId",
         type: "uint256",
       },
     ],
@@ -1007,7 +1071,7 @@ const tokenAbi = [
         type: "address",
       },
     ],
-    name: "typeToSoul",
+    name: "typeToOwner",
     outputs: [
       {
         internalType: "bool",
@@ -1029,9 +1093,9 @@ const tokenAbi = [
     name: "typeURI",
     outputs: [
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "",
-        type: "bytes",
+        type: "string",
       },
     ],
     stateMutability: "view",
@@ -1063,9 +1127,9 @@ const tokenAbi = [
         type: "uint16",
       },
       {
-        internalType: "bytes",
+        internalType: "string",
         name: "_typeURI_",
-        type: "bytes",
+        type: "string",
       },
     ],
     name: "updateTypeURI",
@@ -1098,7 +1162,7 @@ export default class BadgesGrid extends Component {
 
   renderCachedBadges(account) {
     // preload saved values from store
-    console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
+    // console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
     const cached =
       keyValueStore.getObject(account) ||
       keyValueStore.getObject(account);
@@ -1166,6 +1230,7 @@ export default class BadgesGrid extends Component {
       filter,
       FACTORY_DEPLOY_BLOCK
     );
+    
     const sbts = await Promise.all(events.map((e) => e.args[0]));
 
     let credentials = await Promise.all(
@@ -1200,8 +1265,7 @@ export default class BadgesGrid extends Component {
       events,
       this.getTokenInfofromEvent.bind(this)
     );
-    const validTokens = tokens.filter(Boolean);
-    return validTokens;
+    return tokens.filter(Boolean);
   }
 
   async getTokenInfofromEvent(event) {
@@ -1217,12 +1281,22 @@ export default class BadgesGrid extends Component {
       const type = event.args?.tokenType ?? event.args?.[3];
       // check validity of the token
       await contract.ownerOf(tokenId);
-      const bytes = await contract.typeURI(type);
-      const cid = await this.getCIDStringFromBytes(bytes);
-      const metadata = await this.queryIpfsHash(cid);
+      // const bytes = await contract.typeURI(type);
+      const tokenURI = await contract.tokenURI(tokenId);
+      const metadata = await this.queryIpfsURL(tokenURI);
+      
       if (!metadata) return null;
-
-      return { tokenId, type, cid, metadata, org: contract.address };
+      let parts = metadata.image.split('/');
+      return {
+        tokenId,
+        type,
+        cid: tokenURI,
+        metadata: {
+          ...metadata,
+          image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,
+        },
+        org: contract.address,
+      };
     } catch (e) {
       return null;
     }
@@ -1232,6 +1306,15 @@ export default class BadgesGrid extends Component {
     try {
       const res = await fetch(this.resolveIpfsURL(cid));
       const data = res.json();
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+  async queryIpfsURL(url) {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
       return data;
     } catch (e) {
       return null;
