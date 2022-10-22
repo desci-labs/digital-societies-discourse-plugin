@@ -8,16 +8,16 @@ export default Controller.extend(
   ModalFunctionality,
   bufferedProperty("badge"),
   {
+    badge: null,
+
     onShow() {
-      console.log("this", this.badge);
       this.setProperties({
-        props: null,
+        badge: null,
       });
     },
 
-    @computed
-    get desocLink() {
-      return `https://soulbound-tdlic3cws-de-sci-labs.vercel.app/orgs/attestations/${this.badge.type}?address=${this.badge.org}`;
+    onClose() {
+      this.set("badge", null);
     },
   }
 );

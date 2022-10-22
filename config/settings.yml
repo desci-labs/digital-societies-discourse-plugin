@@ -5,6 +5,9 @@ plugins:
   desoc_ipfs_gateway:
     default: 'https://ipfs.io/ipfs'
     client: true
+  desoc_app_url:
+    default: ''
+    client: true
   desoc_factory_contract:
     client: true
     default: ''

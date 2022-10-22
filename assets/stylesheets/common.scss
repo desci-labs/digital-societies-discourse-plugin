@@ -16,10 +16,7 @@
   gap: 0.8rem;
   width: 100%;
   margin: 5px 0;
-}
-
-.badges-grid {
-  margin-left: -2.5px;
+  margin-left: -5px;
 }
 
 .desoc-badge {
@@ -33,6 +30,15 @@
   background-color: transparent;
   box-shadow: none;
   border: none;
+  padding: 0;
+
+  button {
+    padding: 0;
+
+    img {
+      padding: 0;
+    }
+  }
 }
 
 .badge-details-container {

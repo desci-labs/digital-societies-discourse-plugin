@@ -4,12 +4,12 @@
 >
   {{#if this.badge}}
     <div class="badge-details-container">
-      <h3>Description</h3>
+      <h3>Description:</h3>
       <span>{{if this.badge this.badge.metadata.description}}</span>
       <img src={{this.badge.metadata.image}} class="badge-image" />
       
       <div class="links">
-        <a class="link" href={{this.desocLink}} alt="credential website" target="_blank" rel="noopener">
+        <a class="link" href={{this.badge.desocLink}} alt="credential website" target="_blank" rel="noopener">
           View Credential
         </a>
         <a class="link" href={{this.badge.metadata.external_link}} alt="credential website" target="_blank" rel="noopener">

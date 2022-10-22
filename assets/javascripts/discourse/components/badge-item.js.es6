@@ -12,10 +12,9 @@ export default class DesocBadges extends Component {
 
   @action
   showDetails() {
-    const controller = showModal("show-badge", { badge: this.badge });
+    const controller = showModal("show-badge");
     controller.setProperties({
       badge: this.badge,
-      props: this.badge,
     });
   }
 }

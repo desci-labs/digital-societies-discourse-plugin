@@ -1,5 +1,6 @@
 en:
   site_settings:
+    desoc_app_url: "The url of the deployed desoc manager app"
     desoc_badges_enabled: "Is this plugin awesome or not?"
     desoc_ipfs_gateway: "custom ipfs gateway for querying IPFS CIDString content (remove trailing /)"
     desoc_json_rpc: "JSON RPC configuration to be used for blockchain interaction"
