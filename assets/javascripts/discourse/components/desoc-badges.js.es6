@@ -1141,13 +1141,13 @@ const tokenAbi = [
 
 const keyValueStore = new KeyValueStore("");
 
-export default class BadgesGrid extends Component {
+export default class DesocBadges extends Component {
   tagName = "div";
-  classNames = ["badges-grid"];
+  classNames = ["desoc-badges"];
 
   init() {
     super.init(...arguments);
-
+    console.log("start DesocBadges");
     this.startUp();
   }
 
@@ -1171,6 +1171,7 @@ export default class BadgesGrid extends Component {
   }
 
   async startUp() {
+    console.log('start up')
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
 
