@@ -2,9 +2,7 @@
   {{#if credentials}}
     <div class="desoc-group-list">
       {{#each credentials as |credential|}}
-        <a href={{credential.metadata.external_link}} target="_blank" rel="noreferrer">
-          <img src={{credential.metadata.image}} class="desoc-badge" alt={{meta.name}} />
-        </a>
+        <BadgeItem @badge={{credential}} />
       {{/each}}
     </div>
   {{/if}}

@@ -1147,7 +1147,6 @@ export default class DesocBadges extends Component {
 
   init() {
     super.init(...arguments);
-    console.log("start DesocBadges");
     this.startUp();
   }
 
@@ -1171,7 +1170,6 @@ export default class DesocBadges extends Component {
   }
 
   async startUp() {
-    console.log('start up')
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
 

@@ -1,0 +1,9 @@
+{{#if badge}}
+  <button title={{badge.metadata.description}} class="desoc-badges-item" {{on "click" this.showDetails}}>
+    <img
+      src={{badge.metadata.image}}
+      class="desoc-badge"
+      alt={{badge.metadata.name}}
+    />
+  </button>
+{{/if}}
