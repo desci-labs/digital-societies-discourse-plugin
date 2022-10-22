@@ -8,11 +8,14 @@ export default class DesocBadges extends Component {
 
   init() {
     super.init(...arguments);
-    console.log('badge item', this.badge);
   }
 
   @action
   showDetails() {
-    showModal("login");
+    const controller = showModal("show-badge", { badge: this.badge });
+    controller.setProperties({
+      badge: this.badge,
+      props: this.badge,
+    });
   }
 }

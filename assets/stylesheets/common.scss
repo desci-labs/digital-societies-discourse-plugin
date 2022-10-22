@@ -34,3 +34,33 @@
   box-shadow: none;
   border: none;
 }
+
+.badge-details-container {
+  position: relative;
+  min-width: 600px;
+  overflow: hidden;
+
+  span {
+    display: block;
+  }
+
+  .badge-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 10px 0;
+  }
+
+  .links {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    a.link {
+      padding: 5px 15px;
+      background-color: var(--tertiary);
+      color: #ffffff;
+    }
+  }
+}

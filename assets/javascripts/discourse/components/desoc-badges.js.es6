@@ -1141,6 +1141,10 @@ const tokenAbi = [
 
 const keyValueStore = new KeyValueStore("");
 
+const blockExplorers = {
+  5: "https://goerli.etherscan.io/",
+  1: "https://etherscan.io/",
+};
 export default class DesocBadges extends Component {
   tagName = "div";
   classNames = ["desoc-badges"];
@@ -1148,6 +1152,11 @@ export default class DesocBadges extends Component {
   init() {
     super.init(...arguments);
     this.startUp();
+  }
+
+  getExplorerLink(hash) {
+    const chainId = this.siteSettings.desoc_chain_id;
+    return `${blockExplorers[chainId]}tx/${hash}`;
   }
 
   getSiweAccount() {
@@ -1163,8 +1172,7 @@ export default class DesocBadges extends Component {
     // preload saved values from store
     // console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
     const cached =
-      keyValueStore.getObject(account) ||
-      keyValueStore.getObject(account);
+      keyValueStore.getObject(account) || keyValueStore.getObject(account);
 
     this.set("credentials", cached || []);
   }
@@ -1229,20 +1237,18 @@ export default class DesocBadges extends Component {
       filter,
       FACTORY_DEPLOY_BLOCK
     );
-    
+
     const sbts = await Promise.all(events.map((e) => e.args[0]));
 
     let credentials = await Promise.all(
       sbts.map(this.getSbtCredentials.bind(this))
     );
 
-    credentials = credentials
-      .filter(Boolean)
-      .flat()
-      
+    credentials = credentials.filter(Boolean).flat();
+
     keyValueStore.setObject({ key: this.desoc_key, value: credentials });
     keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
-    
+
     this.set("credentials", credentials);
   }
 
@@ -1283,13 +1289,15 @@ export default class DesocBadges extends Component {
       // const bytes = await contract.typeURI(type);
       const tokenURI = await contract.tokenURI(tokenId);
       const metadata = await this.queryIpfsURL(tokenURI);
-      
+
       if (!metadata) return null;
-      let parts = metadata.image.split('/');
+      let parts = metadata.image.split("/");
       return {
         tokenId,
         type,
         cid: tokenURI,
+        txLink: this.getExplorerLink(event.transactionHash),
+
         metadata: {
           ...metadata,
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,

@@ -1,0 +1,24 @@
+<DModalBody
+  @rawTitle={{if this.badge this.badge.metadata.name}}
+  @rawSubtitle={{if this.post this.displayDate}}
+>
+  {{#if this.badge}}
+    <div class="badge-details-container">
+      <h3>Description</h3>
+      <span>{{if this.badge this.badge.metadata.description}}</span>
+      <img src={{this.badge.metadata.image}} class="badge-image" />
+      
+      <div class="links">
+        <a class="link" href={{this.desocLink}} alt="credential website" target="_blank" rel="noopener">
+          View Credential
+        </a>
+        <a class="link" href={{this.badge.metadata.external_link}} alt="credential website" target="_blank" rel="noopener">
+          View Website
+        </a>
+        <a class="link" href={{this.badge.txLink}} alt="credential website" target="_blank" rel="noopener">
+          Etherscan transaction
+        </a>
+      </div>
+    </div>
+  {{/if}}
+</DModalBody>

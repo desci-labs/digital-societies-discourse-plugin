@@ -1141,13 +1141,17 @@ const tokenAbi = [
 
 const keyValueStore = new KeyValueStore("");
 
+const blockExplorers = {
+  5: "https://goerli.etherscan.io/",
+  1: "https://etherscan.io/",
+};
+
 export default class BadgesGrid extends Component {
   tagName = "div";
   classNames = ["badges-grid"];
 
   init() {
     super.init(...arguments);
-
     this.startUp();
   }
 
@@ -1162,10 +1166,8 @@ export default class BadgesGrid extends Component {
 
   renderCachedBadges(account) {
     // preload saved values from store
-    // console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
     const cached =
-      keyValueStore.getObject(account) ||
-      keyValueStore.getObject(account);
+      keyValueStore.getObject(account) || keyValueStore.getObject(account);
 
     this.set("credentials", cached || []);
   }
@@ -1174,10 +1176,7 @@ export default class BadgesGrid extends Component {
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
 
-    if (!siwe_account) {
-      this.renderCachedBadges(this.desoc_user_key);
-      return;
-    }
+    this.renderCachedBadges(this.desoc_user_key);
 
     // if (!siwe_account) return;
     const isAddress =
@@ -1185,7 +1184,6 @@ export default class BadgesGrid extends Component {
       siwe_account.description.length === 42;
 
     await this.loadScripts();
-    // this.multiformats = window.multiformats;
     this.ipfsGateway = this.siteSettings.desoc_ipfs_gateway;
 
     const { ethers } = window.ethers;
@@ -1230,20 +1228,18 @@ export default class BadgesGrid extends Component {
       filter,
       FACTORY_DEPLOY_BLOCK
     );
-    
+
     const sbts = await Promise.all(events.map((e) => e.args[0]));
 
     let credentials = await Promise.all(
       sbts.map(this.getSbtCredentials.bind(this))
     );
 
-    credentials = credentials
-      .filter(Boolean)
-      .flat()
-      
+    credentials = credentials.filter(Boolean).flat();
+
     keyValueStore.setObject({ key: this.desoc_key, value: credentials });
     keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
-    
+
     this.set("credentials", credentials);
   }
 
@@ -1284,13 +1280,14 @@ export default class BadgesGrid extends Component {
       // const bytes = await contract.typeURI(type);
       const tokenURI = await contract.tokenURI(tokenId);
       const metadata = await this.queryIpfsURL(tokenURI);
-      
+
       if (!metadata) return null;
-      let parts = metadata.image.split('/');
+      let parts = metadata.image.split("/");
       return {
         tokenId,
         type,
         cid: tokenURI,
+        txLink: this.getExplorerLink(event.transactionHash),
         metadata: {
           ...metadata,
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,
@@ -1300,6 +1297,11 @@ export default class BadgesGrid extends Component {
     } catch (e) {
       return null;
     }
+  }
+
+  getExplorerLink(hash) {
+    const chainId = this.siteSettings.desoc_chain_id;
+    return `${blockExplorers[chainId]}tx/${hash}`;
   }
 
   async queryIpfsHash(cid) {
@@ -1325,15 +1327,6 @@ export default class BadgesGrid extends Component {
     return `${this.ipfsGateway}/${cid}`;
   }
 
-  // async getCIDStringFromBytes(input) {
-  //   let hex = input.substring(2); // remove 0x
-  //   hex = hex.length % 2 === 0 ? hex.substring(1) : hex;
-
-  //   const bytes = this.multiformats.base16.decode(hex);
-  //   const cid = this.multiformats.CID.decode(bytes);
-  //   return cid.toString();
-  // }
-
   async asyncMap(arr, predicate) {
     const results = await Promise.all(arr.map(predicate));
     return results;
@@ -1341,7 +1334,6 @@ export default class BadgesGrid extends Component {
   async loadScripts() {
     return Promise.all([
       loadScript("/plugins/desoc-badges/javascripts/ethers-5.5.4.umd.min.js"),
-      // loadScript("/plugins/desoc-badges/javascripts/multiformats.js"),
     ]);
   }
 }
