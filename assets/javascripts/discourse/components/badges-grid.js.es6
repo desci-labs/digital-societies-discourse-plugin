@@ -1180,7 +1180,7 @@ export default class BadgesGrid extends Component {
 
     // if (!siwe_account) return;
     const isAddress =
-      siwe_account.description.startsWith("0x") &&
+      siwe_account?.description.startsWith("0x") &&
       siwe_account.description.length === 42;
 
     await this.loadScripts();
@@ -1288,7 +1288,7 @@ export default class BadgesGrid extends Component {
         type,
         cid: tokenURI,
         txLink: this.getExplorerLink(event.transactionHash),
-        desocLink: `${this.siteSettings.desoc_app_url}orgs/attestations/${type}?address=${contract.address}`,
+        desocLink: `${this.siteSettings.desoc_app_url}attestations/${type}?address=${contract.address}`,
         metadata: {
           ...metadata,
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,

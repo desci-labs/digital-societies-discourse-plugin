@@ -1297,7 +1297,7 @@ export default class DesocBadges extends Component {
         type,
         cid: tokenURI,
         txLink: this.getExplorerLink(event.transactionHash),
-        desocLink: `${this.siteSettings.desoc_app_url}orgs/attestations/${type}?address=${contract.address}`,
+        desocLink: `${this.siteSettings.desoc_app_url}attestations/${type}?address=${contract.address}`,
         metadata: {
           ...metadata,
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,

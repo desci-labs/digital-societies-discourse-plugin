@@ -1,5 +1,4 @@
 import Controller from "@ember/controller";
-import { action, computed } from "@ember/object";
 import ModalFunctionality from "discourse/mixins/modal-functionality";
 import { bufferedProperty } from "discourse/mixins/buffered-content";
 
