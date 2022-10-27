@@ -1157,6 +1157,7 @@ export default class BadgesGrid extends Component {
 
   getSiweAccount() {
     const associated_accounts = this.model.associated_accounts;
+    console.log('associated_accounts', associated_accounts);
     if (!associated_accounts) return null;
     const siwe_account = associated_accounts.find(
       (account) => account.name === "siwe"
