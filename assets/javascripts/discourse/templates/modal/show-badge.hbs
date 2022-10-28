@@ -7,15 +7,33 @@
       <h3>Description:</h3>
       <span>{{if this.badge this.badge.metadata.description}}</span>
       <img src={{this.badge.metadata.image}} class="badge-image" />
-      
+
       <div class="links">
-        <a class="link" href={{this.badge.desocLink}} alt="Attestation website" target="_blank" rel="noopener">
-          View Attestation
+        <a
+          class="link"
+          href={{this.badge.desocLink}}
+          alt="Attestation website"
+          target="_blank"
+          rel="noopener"
+        >
+          View SBT holders
         </a>
-        <a class="link" href={{this.badge.metadata.external_link}} alt="credential website" target="_blank" rel="noopener">
-          View Website
+        <a
+          class="link"
+          href={{this.badge.metadata.external_link}}
+          alt="credential website"
+          target="_blank"
+          rel="noopener"
+        >
+          View SBT specification
         </a>
-        <a class="link" href={{this.badge.txLink}} alt="credential website" target="_blank" rel="noopener">
+        <a
+          class="link"
+          href={{this.badge.txLink}}
+          alt="credential website"
+          target="_blank"
+          rel="noopener"
+        >
           Etherscan transaction
         </a>
       </div>
