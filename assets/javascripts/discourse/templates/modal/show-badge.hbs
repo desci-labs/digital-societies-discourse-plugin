@@ -1,7 +1,4 @@
-<DModalBody
-  @rawTitle={{if this.badge this.badge.metadata.name}}
-  @rawSubtitle={{if this.post this.displayDate}}
->
+<DModalBody @rawTitle={{if this.badge this.badge.metadata.name}}>
   {{#if this.badge}}
     <div class="badge-details-container">
       <h3>Description:</h3>
