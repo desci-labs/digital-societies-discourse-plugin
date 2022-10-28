@@ -14,7 +14,6 @@ register_asset "stylesheets/common.scss"
 after_initialize do
   module UserSerializerExtension
     def include_associated_accounts?
-      puts "OVERRIDE include_associated_accounts"
       true
     end
   end

@@ -1161,7 +1161,6 @@ export default class DesocBadges extends Component {
 
   getSiweAccount() {
     const associated_accounts = this.model.associated_accounts;
-    console.log("associated_accounts", associated_accounts);
     if (!associated_accounts) return null;
     const siwe_account = associated_accounts.find(
       (account) => account.name === "siwe"
@@ -1170,30 +1169,23 @@ export default class DesocBadges extends Component {
   }
 
   renderCachedBadges(account) {
-    // preload saved values from store
-    // console.log('key', account, this.model.id, this.siteSettings.desoc_factory_contract);
     const cached =
       keyValueStore.getObject(account) || keyValueStore.getObject(account);
-
     this.set("credentials", cached || []);
+    if (cached && cached?.length > 0) this.setProperties({ loading: false });
   }
 
   async startUp() {
+    this.setProperties({ loading: true });
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
-
-    if (!siwe_account) {
-      this.renderCachedBadges(this.desoc_user_key);
-      return;
-    }
-
-    // if (!siwe_account) return;
+    this.renderCachedBadges(this.desoc_user_key);
+    
     const isAddress =
       siwe_account.description.startsWith("0x") &&
       siwe_account.description.length === 42;
 
     await this.loadScripts();
-    // this.multiformats = window.multiformats;
     this.ipfsGateway = this.siteSettings.desoc_ipfs_gateway;
 
     const { ethers } = window.ethers;
@@ -1204,7 +1196,10 @@ export default class DesocBadges extends Component {
     const mainnetProvider = new ethers.providers.JsonRpcProvider(
       this.siteSettings.desoc_mainnet_json_rpc
     );
-    if (!this.provider) return;
+    if (!this.provider) {
+      this.setProperties({ loading: false });
+      return;
+    }
 
     this.account = siwe_account.description;
 
@@ -1218,8 +1213,10 @@ export default class DesocBadges extends Component {
       !this.siteSettings.desoc_json_rpc ||
       !this.siteSettings.desoc_factory_contract ||
       !this.account
-    )
+    ) {
+      this.setProperties({ loading: false });
       return;
+    }
 
     this.desoc_key = `desoc-badges-${this.account}`;
     this.renderCachedBadges(this.desoc_key);
@@ -1251,6 +1248,7 @@ export default class DesocBadges extends Component {
     keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
 
     this.set("credentials", credentials);
+    this.setProperties({ loading: false });
   }
 
   async getSbtCredentials(sbtAddress) {
@@ -1333,15 +1331,6 @@ export default class DesocBadges extends Component {
     return `${this.ipfsGateway}/${cid}`;
   }
 
-  // async getCIDStringFromBytes(input) {
-  //   let hex = input.substring(2); // remove 0x
-  //   hex = hex.length % 2 === 0 ? hex.substring(1) : hex;
-
-  //   const bytes = this.multiformats.base16.decode(hex);
-  //   const cid = this.multiformats.CID.decode(bytes);
-  //   return cid.toString();
-  // }
-
   async asyncMap(arr, predicate) {
     const results = await Promise.all(arr.map(predicate));
     return results;
@@ -1349,7 +1338,6 @@ export default class DesocBadges extends Component {
   async loadScripts() {
     return Promise.all([
       loadScript("/plugins/desoc-badges/javascripts/ethers-5.5.4.umd.min.js"),
-      // loadScript("/plugins/desoc-badges/javascripts/multiformats.js"),
     ]);
   }
 }

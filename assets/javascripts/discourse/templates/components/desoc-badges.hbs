@@ -1,9 +1,29 @@
 <div class="desoc-container">
-  {{#if credentials}}
+  {{#if this.loading}}
     <div class="desoc-group-list">
-      {{#each credentials as |credential|}}
-        <BadgeItem @badge={{credential}} />
-      {{/each}}
+      <div class="desoc-card-container">
+        <div
+          class="avatar-placeholder animated-placeholder placeholder-animation"
+        ></div>
+      </div>
+      <div class="desoc-card-container">
+        <div
+          class="avatar-placeholder animated-placeholder placeholder-animation"
+        ></div>
+      </div>
+      <div class="desoc-card-container">
+        <div
+          class="avatar-placeholder animated-placeholder placeholder-animation"
+        ></div>
+      </div>
+    </div>
+  {{else}}
+    <div class="desoc-group-list">
+      {{#if credentials}}
+        {{#each credentials as |credential|}}
+          <BadgeItem @badge={{credential}} />
+        {{/each}}
+      {{/if}}
     </div>
   {{/if}}
 </div>

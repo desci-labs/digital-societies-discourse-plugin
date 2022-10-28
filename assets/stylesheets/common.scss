@@ -1,3 +1,49 @@
+$card_width: 50px;
+$avatar_width: 50px;
+$avatar_margin: 0;
+
+.avatar-placeholder {
+  width: $avatar_width;
+  height: $avatar_width;
+  border-radius: 100%;
+  position: relative;
+  overflow: hidden;
+  &:before {
+    animation: placeHolderShimmer 10s linear infinite forwards;
+    position: absolute;
+    left: 0;
+    content: "";
+    background: linear-gradient(
+      to right,
+      var(--primary-very-low) 10%,
+      var(--primary-low) 18%,
+      var(--primary-very-low) 33%
+    );
+    height: $avatar_width;
+    width: $card_width;
+  }
+}
+
+.desoc-card-container {
+  width: $avatar_width;
+  height: $avatar_width;
+}
+// styles for user cards only
+.desoc-card {
+  // avatar - names - controls
+  .avatar-placeholder {
+    width: $avatar_width;
+    height: $avatar_width;
+  }
+  .desoc-card-avatar {
+    margin-top: $avatar_margin;
+    max-height: $avatar_width;
+  }
+  .first-row {
+    display: flex;
+  }
+}
+
 .desoc-container {
   width: 100%;
   max-width: fit-content;
