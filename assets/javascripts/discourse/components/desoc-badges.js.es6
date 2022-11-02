@@ -1172,6 +1172,7 @@ export default class DesocBadges extends Component {
     const cached =
       keyValueStore.getObject(account) || keyValueStore.getObject(account);
     this.set("credentials", cached || []);
+    console.log(cached);
     if (cached && cached?.length > 0) this.setProperties({ loading: false });
   }
 
@@ -1286,9 +1287,10 @@ export default class DesocBadges extends Component {
       // check validity of the token
       await contract.ownerOf(tokenId);
       // const bytes = await contract.typeURI(type);
+      const contractURI = await contract.contractURI();
+      const orgMetadata = await this.queryIpfsURL(contractURI);
       const tokenURI = await contract.tokenURI(tokenId);
       const metadata = await this.queryIpfsURL(tokenURI);
-
       if (!metadata) return null;
       let parts = metadata.image.split("/");
       return {
@@ -1301,7 +1303,8 @@ export default class DesocBadges extends Component {
           ...metadata,
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,
         },
-        org: contract.address,
+        sbtAddress: contract.address,
+        sbtMetadata: orgMetadata
       };
     } catch (e) {
       return null;
