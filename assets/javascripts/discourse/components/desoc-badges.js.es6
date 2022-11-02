@@ -1169,10 +1169,10 @@ export default class DesocBadges extends Component {
   }
 
   renderCachedBadges(account) {
-    const cached =
-      keyValueStore.getObject(account) || keyValueStore.getObject(account);
-    this.set("credentials", cached || []);
-    console.log(cached);
+    const cached = keyValueStore.getObject(account);
+    this.setProperties({ credentials: cached });
+
+    if (!cached) return;
     if (cached && cached?.length > 0) this.setProperties({ loading: false });
   }
 
@@ -1181,8 +1181,12 @@ export default class DesocBadges extends Component {
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
     this.renderCachedBadges(this.desoc_user_key);
-    
+
+    if (!siwe_account)
+      this.setProperties({ loading: false, credentials: null });
+
     const isAddress =
+      siwe_account &&
       siwe_account.description.startsWith("0x") &&
       siwe_account.description.length === 42;
 
@@ -1249,6 +1253,7 @@ export default class DesocBadges extends Component {
     keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
 
     this.set("credentials", credentials);
+    this.setProperties({ credentials: credentials });
     this.setProperties({ loading: false });
   }
 
@@ -1304,7 +1309,7 @@ export default class DesocBadges extends Component {
           image: `https://${parts[parts.length - 1]}.ipfs.w3s.link`,
         },
         sbtAddress: contract.address,
-        sbtMetadata: orgMetadata
+        sbtMetadata: orgMetadata,
       };
     } catch (e) {
       return null;

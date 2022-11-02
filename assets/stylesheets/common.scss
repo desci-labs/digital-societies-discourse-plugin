@@ -9,7 +9,7 @@ $avatar_margin: 0;
   position: relative;
   overflow: hidden;
   &:before {
-    animation: placeHolderShimmer 10s linear infinite forwards;
+    animation: placeHolderShimmer 20s linear infinite forwards;
     position: absolute;
     left: 0;
     content: "";
@@ -17,7 +17,7 @@ $avatar_margin: 0;
       to right,
       var(--primary-very-low) 10%,
       var(--primary-low) 18%,
-      var(--primary-very-low) 33%
+      var(--primary-very-low) 45%
     );
     height: $avatar_width;
     width: $card_width;
@@ -92,15 +92,26 @@ $avatar_margin: 0;
   min-width: 600px;
   overflow: hidden;
 
-  span {
-    display: block;
-  }
+  .badge-details-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: start;
+    grid-template-columns: max-content;
+    gap: 1rem;
+    margin-bottom: 2rem;
 
-  .badge-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin: 10px 0;
+    span {
+      display: block;
+      word-wrap: break-word;
+    }
+
+    .badge-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 10px 0;
+    }
   }
 
   .links {

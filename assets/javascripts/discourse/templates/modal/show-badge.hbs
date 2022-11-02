@@ -1,10 +1,10 @@
-<DModalBody @rawTitle={{if this.badge this.badge.metadata.name}}>
+<DModalBody @rawTitle={{this.modalTitle}}>
   {{#if this.badge}}
     <div class="badge-details-container">
-      <h3>Description:</h3>
-      <span>{{if this.badge this.badge.metadata.description}}</span>
-      <img src={{this.badge.metadata.image}} class="badge-image" />
-
+      <div class="badge-details-content">
+        <img src={{this.badge.metadata.image}} class="badge-image" />
+        <div>{{if this.badge this.badge.metadata.description}}</div>
+      </div>
       <div class="links">
         <a
           class="link"
