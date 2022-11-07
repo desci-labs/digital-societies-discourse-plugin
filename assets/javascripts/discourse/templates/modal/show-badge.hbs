@@ -3,7 +3,12 @@
     <div class="badge-details-container">
       <div class="badge-details-content">
         <img src={{this.badge.metadata.image}} class="badge-image" />
-        <div>{{if this.badge this.badge.metadata.description}}</div>
+        <div>
+          {{#if this.attestationType}}
+            <span class="badge-type">{{this.attestationType}}</span>
+          {{/if}}
+          <span>{{if this.badge this.badge.metadata.description}}</span>
+        </div>
       </div>
       <div class="links">
         <a

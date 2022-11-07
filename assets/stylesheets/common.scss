@@ -95,11 +95,20 @@ $avatar_margin: 0;
   .badge-details-content {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: start;
     grid-template-columns: max-content;
     gap: 1rem;
     margin-bottom: 2rem;
+
+    .badge-type {
+      display: block;
+      margin-bottom: 10px;
+      padding: 3px 15px;
+      color: #ffffff;
+      background-color: var(--tertiary);
+      width: max-content;
+    }
 
     span {
       display: block;

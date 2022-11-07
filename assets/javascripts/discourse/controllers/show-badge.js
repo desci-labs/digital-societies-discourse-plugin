@@ -15,8 +15,13 @@ export default Controller.extend(
     },
 
     get modalTitle() {
-      if(!this.badge) return '';
-      return `${this.badge.sbtMetadata.name} / ${this.badge.metadata.name}`
+      if (!this.badge) return "";
+      return `${this.badge.sbtMetadata.name} / ${this.badge.metadata.name}`;
+    },
+
+    get attestationType() {
+      if (!this.badge) return "";
+      return this.badge.metadata?.attestationType || "";
     },
 
     onClose() {

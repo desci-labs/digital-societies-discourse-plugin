@@ -1251,7 +1251,7 @@ export default class DesocBadges extends Component {
 
     keyValueStore.setObject({ key: this.desoc_key, value: credentials });
     keyValueStore.setObject({ key: this.desoc_user_key, value: credentials });
-
+    console.log(credentials);
     this.set("credentials", credentials);
     this.setProperties({ credentials: credentials });
     this.setProperties({ loading: false });
