@@ -7,6 +7,7 @@ en:
     desoc_mainnet_json_rpc: "JSON RPC configuration to be used for resolving ens names"
     desoc_chain_id: "Custom Chain ID where the factory contract is deployed to"
     desoc_factory_contract: "Input Desco Factory contract address here"
+    desoc_contracts: "Specifiy a list of desoc contracts you want their badges displayed in your forum"
     placeholder:
       desoc_json_rpc:
         key: "Chain ID"
@@ -14,6 +15,9 @@ en:
       desoc_mainnet_json_rpc:
         key: "Chain ID"
         value: "JSON RPC URL"
+      desoc_contracts:
+        key: "Desoc contract address"
+        value: "Add a desoc contract to the whitelist be tracked"
   js:
     discourse_plugin_name:
       placeholder: placeholder

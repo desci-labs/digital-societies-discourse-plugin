@@ -1177,6 +1177,12 @@ export default class DesocBadges extends Component {
   }
 
   async startUp() {
+    if (
+      !this.siteSettings.desoc_factory_contract &&
+      !this.siteSettings.desoc_contracts
+    )
+      return;
+
     this.setProperties({ loading: true });
     const siwe_account = this.getSiweAccount();
     this.desoc_user_key = `desoc-badges-${this.model.id}`;
@@ -1205,7 +1211,6 @@ export default class DesocBadges extends Component {
       this.setProperties({ loading: false });
       return;
     }
-
     this.account = siwe_account.description;
 
     if (!isAddress) {
@@ -1214,11 +1219,7 @@ export default class DesocBadges extends Component {
       );
     }
 
-    if (
-      !this.siteSettings.desoc_json_rpc ||
-      !this.siteSettings.desoc_factory_contract ||
-      !this.account
-    ) {
+    if (!this.siteSettings.desoc_json_rpc || !this.account) {
       this.setProperties({ loading: false });
       return;
     }
@@ -1230,23 +1231,28 @@ export default class DesocBadges extends Component {
   }
 
   async queryDesocFactory() {
-    this.factoryContract = new this.ethers.Contract(
-      this.siteSettings.desoc_factory_contract,
-      factoryAbi,
-      this.provider
-    );
-    const filter = this.factoryContract.filters.TokenCreated();
-    const events = await this.factoryContract.queryFilter(
-      filter,
-      FACTORY_DEPLOY_BLOCK
-    );
+    let sbts =
+      this.siteSettings.desoc_contracts &&
+      this.siteSettings.desoc_contracts.split("|");
 
-    const sbts = await Promise.all(events.map((e) => e.args[0]));
+    if (!sbts || sbts.length === 0) {
+      this.factoryContract = new this.ethers.Contract(
+        this.siteSettings.desoc_factory_contract,
+        factoryAbi,
+        this.provider
+      );
+      const filter = this.factoryContract.filters.TokenCreated();
+      const events = await this.factoryContract.queryFilter(
+        filter,
+        FACTORY_DEPLOY_BLOCK
+      );
+
+      sbts = await Promise.all(events.map((e) => e.args[0]));
+    }
 
     let credentials = await Promise.all(
       sbts.map(this.getSbtCredentials.bind(this))
     );
-
     credentials = credentials.filter(Boolean).flat();
 
     keyValueStore.setObject({ key: this.desoc_key, value: credentials });

@@ -11,6 +11,13 @@ plugins:
   desoc_factory_contract:
     client: true
     default: ''
+  desoc_contracts:
+    client: true
+    default: ''
+    type: list
+    placeholder:
+      key: "desoc_contracts.key_placeholder"
+      value: "desoc_contracts.value_placeholder"
   desoc_chain_id:
     client: true
     default: 5
