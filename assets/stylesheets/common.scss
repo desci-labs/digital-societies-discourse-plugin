@@ -99,7 +99,7 @@ $avatar_margin: 0;
     justify-content: start;
     grid-template-columns: max-content;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: .5rem;
 
     .badge-type {
       display: block;
@@ -124,7 +124,7 @@ $avatar_margin: 0;
   }
 
   .links {
-    margin-top: 5px;
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
     gap: 10px;

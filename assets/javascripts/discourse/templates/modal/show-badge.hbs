@@ -8,36 +8,36 @@
             <span class="badge-type">{{this.attestationType}}</span>
           {{/if}}
           <span>{{if this.badge this.badge.metadata.description}}</span>
+          <div class="links">
+            <a
+              class="link"
+              href={{this.badge.desocLink}}
+              alt="Attestation website"
+              target="_blank"
+              rel="noopener"
+            >
+              View holders
+            </a>
+            <a
+              class="link"
+              href={{this.badge.metadata.external_link}}
+              alt="credential website"
+              target="_blank"
+              rel="noopener"
+            >
+              More info
+            </a>
+            <a
+              class="link"
+              href={{this.badge.txLink}}
+              alt="credential website"
+              target="_blank"
+              rel="noopener"
+            >
+              View on block explorer
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="links">
-        <a
-          class="link"
-          href={{this.badge.desocLink}}
-          alt="Attestation website"
-          target="_blank"
-          rel="noopener"
-        >
-          View SBT holders
-        </a>
-        <a
-          class="link"
-          href={{this.badge.metadata.external_link}}
-          alt="credential website"
-          target="_blank"
-          rel="noopener"
-        >
-          View SBT specification
-        </a>
-        <a
-          class="link"
-          href={{this.badge.txLink}}
-          alt="credential website"
-          target="_blank"
-          rel="noopener"
-        >
-          Etherscan transaction
-        </a>
       </div>
     </div>
   {{/if}}

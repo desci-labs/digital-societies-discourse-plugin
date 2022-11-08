@@ -16,7 +16,7 @@ export default Controller.extend(
 
     get modalTitle() {
       if (!this.badge) return "";
-      return `${this.badge.sbtMetadata.name} / ${this.badge.metadata.name}`;
+      return `${this.badge.sbtMetadata.name} | ${this.badge.metadata.name}`;
     },
 
     get attestationType() {
