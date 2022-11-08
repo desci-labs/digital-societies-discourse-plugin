@@ -4,40 +4,46 @@
       <div class="badge-details-content">
         <img src={{this.badge.metadata.image}} class="badge-image" />
         <div>
-          {{#if this.attestationType}}
-            <span class="badge-type">{{this.attestationType}}</span>
-          {{/if}}
-          <span>{{if this.badge this.badge.metadata.description}}</span>
-          <div class="links">
-            <a
-              class="link"
-              href={{this.badge.desocLink}}
-              alt="Attestation website"
-              target="_blank"
-              rel="noopener"
-            >
-              View holders
-            </a>
-            <a
-              class="link"
-              href={{this.badge.metadata.external_link}}
-              alt="credential website"
-              target="_blank"
-              rel="noopener"
-            >
-              More info
-            </a>
-            <a
-              class="link"
-              href={{this.badge.txLink}}
-              alt="credential website"
-              target="_blank"
-              rel="noopener"
-            >
-              View on block explorer
-            </a>
-          </div>
+          <h2 class="badge-name">{{this.badge.metadata.name}}</h2>
+          <span class="badge-type">Badge Type:
+            <b>{{this.attestationType}}</b></span>
+          <span class="badge-description">{{if
+              this.badge
+              this.badge.metadata.description
+            }}</span>
         </div>
+      </div>
+      <div class="badge-details__footer">
+        <a
+          class="link"
+          href={{this.badge.desocLink}}
+          alt="Attestation website"
+          target="_blank"
+          rel="noopener"
+        >
+          View holders
+          {{d-icon "external-link-alt"}}
+        </a>
+        <a
+          class="link"
+          href={{this.badge.metadata.external_link}}
+          alt="credential website"
+          target="_blank"
+          rel="noopener"
+        >
+          More info
+          {{d-icon "external-link-alt"}}
+        </a>
+        <a
+          class="link"
+          href={{this.badge.txLink}}
+          alt="credential website"
+          target="_blank"
+          rel="noopener"
+        >
+          Txn
+          {{d-icon "external-link-alt"}}
+        </a>
       </div>
     </div>
   {{/if}}

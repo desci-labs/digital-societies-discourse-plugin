@@ -99,17 +99,19 @@ $avatar_margin: 0;
     justify-content: start;
     grid-template-columns: max-content;
     gap: 1rem;
-    margin-bottom: .5rem;
+    // margin-bottom: 0.5rem;
 
+    .badge-name {
+      margin: .5rem 0 5px 0;
+    }
     .badge-type {
-      display: block;
-      margin-bottom: 10px;
-      padding: 3px 15px;
-      color: #ffffff;
-      background-color: var(--tertiary);
-      width: max-content;
+      margin: 0 0 10px 0;
     }
 
+    .badge-description {
+      font-style: italic;
+      color: var(--primary-high);
+    }
     span {
       display: block;
       word-wrap: break-word;
@@ -123,16 +125,21 @@ $avatar_margin: 0;
     }
   }
 
-  .links {
-    margin-top: 1.5rem;
+  .badge-details__footer {
+    margin: 1.5rem 0 0;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 10px;
 
     a.link {
       padding: 5px 15px;
-      background-color: var(--tertiary);
-      color: #ffffff;
+      background-color: var(--primary-low);
+      color: var(--primary-very-high);
+
+      svg {
+        margin-left: 5px;
+      }
     }
   }
 }
