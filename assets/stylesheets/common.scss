@@ -105,7 +105,8 @@ $avatar_margin: 0;
       margin: .5rem 0 5px 0;
     }
     .badge-type {
-      margin: 0 0 10px 0;
+      margin-bottom: 2px;
+      text-decoration: underline;
     }
 
     .badge-description {
@@ -118,8 +119,8 @@ $avatar_margin: 0;
     }
 
     .badge-image {
-      width: 80px;
-      height: 80px;
+      width: 95px;
+      height: 95px;
       border-radius: 50%;
       margin: 10px 0;
     }
@@ -133,12 +134,19 @@ $avatar_margin: 0;
     gap: 10px;
 
     a.link {
+      display: flex;
       padding: 5px 15px;
       background-color: var(--primary-low);
       color: var(--primary-very-high);
 
       svg {
         margin-left: 5px;
+        width: 20;
+        height: 20;
+
+        path {
+          fill: var(--primary);
+        }
       }
     }
   }
