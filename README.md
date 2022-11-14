@@ -2,7 +2,7 @@
 
 **Discourse plugin to display badges for Desoc SBT recipient or members**
 
-For more information, please see: [](https://sbt.desci.com/t/to-view-sbts-click-on-user-avatars/16)
+For more information, please see: [Form discussion](https://sbt.desci.com/t/to-view-sbts-click-on-user-avatars/16)
 ### Installation
 
 Follow the [plugin installation guide](https://meta.discourse.org/t/install-a-plugin/19157).
