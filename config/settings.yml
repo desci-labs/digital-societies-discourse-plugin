@@ -3,14 +3,14 @@ plugins:
     default: true
     client: true
   desoc_ipfs_gateway:
-    default: 'https://ipfs.io/ipfs'
+    default: 'https://w3s.link/ipfs'
     client: true
   desoc_app_url:
-    default: ''
+    default: 'https://soulbound-git-dev-de-sci-labs.vercel.app/'
     client: true
   desoc_factory_contract:
     client: true
-    default: ''
+    default: '0x5BB342Dc710dd6E4129b949B91934149dCD335Aa'
   desoc_contracts:
     client: true
     default: ''
@@ -23,13 +23,13 @@ plugins:
     default: 5
   desoc_json_rpc:
     client: true
-    default: 'https://goerli.infura.io/v3/1b91f66482d64c7e900913c7763227f2'
+    default: ''
     placeholder:
       key: "desoc_json_rpc.key_placeholder"
       value: "desoc_json_rpc.value_placehoder"
   desoc_mainnet_json_rpc:
     client: true
-    default: 'https://mainnet.infura.io/v3/1b91f66482d64c7e900913c7763227f2'
+    default: ''
     placeholder:
       key: "desoc_mainnet_json_rpc.key_placeholder"
       value: "desoc_mainnet_json_rpc.value_placehoder"
