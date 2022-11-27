@@ -118,19 +118,12 @@ $avatar_margin: 0;
       word-wrap: break-word;
     }
 
-    .badge-image--wrapper {
-      min-width: 95px;
-      min-height: 95px;
+    .badge-image {
+      width: 95px;
+      height: 95px;
       border-radius: 50%;
-      margin: 10px 0;
-
-      .badge-image {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center;
-      }
+      object-fit: cover;
+      object-position: center;
     }
   }
 
