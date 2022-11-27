@@ -2,10 +2,12 @@
   {{#if this.badge}}
     <div class="badge-details-container">
       <div class="badge-details-content">
-        <img src={{this.badge.metadata.image}} class="badge-image" />
+        <div class="badge-image--wrapper">
+          <img src={{this.badge.metadata.image}} class="badge-image" />
+        </div>
         <div>
           <h2 class="badge-name">{{this.badge.metadata.name}}</h2>
-          <span class="badge-type">Badge Type:
+          <span class="badge-type">
             <b>{{this.attestationType}}</b></span>
           <span class="badge-description">{{if
               this.badge
