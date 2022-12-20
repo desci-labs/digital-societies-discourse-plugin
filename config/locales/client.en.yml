@@ -2,20 +2,11 @@ en:
   site_settings:
     desoc_app_url: "The url of the deployed desoc manager app"
     desoc_badges_enabled: "Is this plugin awesome or not?"
-    desoc_ipfs_gateway: "custom ipfs gateway for querying IPFS CIDString content (remove trailing /)"
-    desoc_json_rpc: "JSON RPC configuration to be used for blockchain interaction"
-    desoc_mainnet_json_rpc: "JSON RPC configuration to be used for resolving ens names"
+    desoc_subgraph_url: "Desoc protocol subgraph query endpoint"
     desoc_chain_id: "Custom Chain ID where the factory contract is deployed to"
-    desoc_factory_contract: "Input Desco Factory contract address here"
-    desoc_contracts: "Specifiy a list of desoc contracts you want their badges displayed in your forum"
+    desoc_whitelist: "Specifiy a list of desoc contracts you want their badges displayed in your forum"
     placeholder:
-      desoc_json_rpc:
-        key: "Chain ID"
-        value: "JSON RPC URL"
-      desoc_mainnet_json_rpc:
-        key: "Chain ID"
-        value: "JSON RPC URL"
-      desoc_contracts:
+      desoc_whitelist:
         key: "Desoc contract address"
         value: "Add a desoc contract to the whitelist be tracked"
   js:

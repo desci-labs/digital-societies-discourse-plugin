@@ -2,34 +2,28 @@ plugins:
   desoc_badges_enabled:
     default: true
     client: true
-  desoc_ipfs_gateway:
-    default: 'https://w3s.link/ipfs'
-    client: true
   desoc_app_url:
     default: 'https://soulbound-git-dev-de-sci-labs.vercel.app/'
     client: true
-  desoc_factory_contract:
-    client: true
-    default: '0x5BB342Dc710dd6E4129b949B91934149dCD335Aa'
-  desoc_contracts:
+  desoc_whitelist:
     client: true
     default: ''
     type: list
     placeholder:
-      key: "desoc_contracts.key_placeholder"
-      value: "desoc_contracts.value_placeholder"
+      key: "desoc_whitelist.key_placeholder"
+      value: "desoc_whitelist.value_placeholder"
   desoc_chain_id:
     client: true
     default: 5
-  desoc_json_rpc:
+  desoc_subgraph_url:
     client: true
-    default: ''
+    default: 'https://graph-goerli-dev.desci.com/subgraphs/name/desoc'
     placeholder:
-      key: "desoc_json_rpc.key_placeholder"
-      value: "desoc_json_rpc.value_placehoder"
+      key: "desoc_subgraph_url.key_placeholder"
+      value: "desoc_subgraph_url.value_placehoder"
   desoc_mainnet_json_rpc:
     client: true
-    default: ''
+    default: 'https://mainnet.infura.io/v3/1b91f66482d64c7e900913c7763227f2'
     placeholder:
       key: "desoc_mainnet_json_rpc.key_placeholder"
       value: "desoc_mainnet_json_rpc.value_placehoder"

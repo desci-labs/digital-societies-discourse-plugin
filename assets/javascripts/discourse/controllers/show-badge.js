@@ -16,12 +16,12 @@ export default Controller.extend(
 
     get modalTitle() {
       if (!this.badge) return "";
-      return `${this.badge.sbtMetadata.name}`;
+      return `${this.badge.society.metadata.name}`;
     },
 
     get attestationType() {
       if (!this.badge) return "";
-      return this.badge.metadata?.attestationType || "";
+      return this.badge.attestation.metadata?.attestationType || "";
     },
 
     onClose() {
