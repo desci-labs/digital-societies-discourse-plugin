@@ -3,7 +3,7 @@ plugins:
     default: true
     client: true
   desoc_app_url:
-    default: 'https://soulbound-git-dev-de-sci-labs.vercel.app/'
+    default: 'https://societies.desci.com/'
     client: true
   desoc_whitelist:
     client: true
